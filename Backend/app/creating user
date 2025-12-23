@@ -1,0 +1,12 @@
+with Session(engine) as session:
+    TestUser = User(
+        first_name = "Tester",
+        last_name = "Testororvich",
+        email = "testemail@gmail.com",
+        phone_number = "0983838123213",
+        password = "1234567890"
+    )
+
+    session.add_all([TestUser])
+
+    session.commit()
