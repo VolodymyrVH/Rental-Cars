@@ -36,7 +36,7 @@ class Payment(Base):
     rental_id: Mapped[int] = mapped_column(ForeignKey("rentals.id", ondelete="CASCADE"), nullable=False, unique=True)
     amount: Mapped[DECIMAL] = mapped_column(DECIMAL(10, 2), nullable=False)
     payment_method: Mapped[str] = mapped_column(String(30), nullable=False)
-    status: Mapped[str] = mapped_column(Enum("PAYED", "NOT_PAID", native_enum=False), nullable=False)
+    status: Mapped[str] = mapped_column(Enum("PAID", "NOT_PAID", native_enum=False), nullable=False)
     paid_at = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     rental: Mapped["Rental"] = relationship(back_populates="payment")
