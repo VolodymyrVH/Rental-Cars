@@ -56,6 +56,11 @@ class GearboxTypeResponseSchema(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class CarImageCreateSchema(BaseModel):
+    image_url: str
+    is_primary: bool = False
+
+
 class CarCreateSchema(BaseModel):
     brand: str
     model: str
@@ -70,6 +75,8 @@ class CarCreateSchema(BaseModel):
     year: int
     mileage: int
     plate: str
+    images: list[CarImageCreateSchema] | None = None
+    tags: list[TagSchema] | None = None
 
     @field_validator('plate')
     def validate_plate(cls, v: str) -> str:
