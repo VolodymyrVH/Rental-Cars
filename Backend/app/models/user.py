@@ -1,8 +1,8 @@
 from sqlalchemy import String, DateTime, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
-from core.database import Base
-from models.rental import Rental
+from app.core.database import Base
+#from app.models.rental import Rental
 
 
 class User(Base):

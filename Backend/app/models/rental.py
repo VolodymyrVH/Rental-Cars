@@ -1,9 +1,9 @@
 from sqlalchemy import String, DateTime, Enum, ForeignKey, DECIMAL
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
-from core.database import Base
-from models.user import User
-from models.car import Car
+from app.core.database import Base
+#from app.models.user import User
+#from app.models.car import Car
 
 
 class Rental(Base):
@@ -15,10 +15,10 @@ class Rental(Base):
     start_date = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     end_date = mapped_column(DateTime(timezone=True), nullable=False)
     created_at = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
-    returned_at = mapped_column(DateTime(timezone=True), onupdate=func.now())
-    price_for_day: Mapped[DECIMAL] = mapped_column(DECIMAL(10, 2), nullable=False)
+    returned_at = mapped_column(DateTime(timezone=True), nullable=True)
+    price_for_day: Mapped[DECIMAL] = mapped_column(DECIMAL(10, 2), nullable=False) 
     price_sum: Mapped[DECIMAL] = mapped_column(DECIMAL(10, 2), nullable=False)
-    status: Mapped[str] = mapped_column(Enum("NOT_STARTED", "ACTIVE", "FINISHED", native_enum=False), default="NOT_STARTED")
+    status: Mapped[str] = mapped_column(Enum("NOT_STARTED", "ACTIVE", "FINISHED", "CANCELLED", native_enum=False), default="NOT_STARTED")
 
     user: Mapped["User"] = relationship(back_populates="rentals")
     car: Mapped["Car"] = relationship(back_populates="rentals")

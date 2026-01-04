@@ -1,14 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from Backend.app.core.database import get_db
-from Backend.app.models.car import Car, CarImage, Tag
-from Backend.app.schemas.car import CarCreateSchema, CarResponseSchema, CarImageCreateSchema, TagSchema
+from app.core.database import get_db
+from app.models.car import Car, CarImage, Tag
+from app.schemas.car import CarCreateSchema, CarResponseSchema, CarImageCreateSchema, TagSchema
+from app.api.auth import get_current_user
+from app.api.auth import User
 
 router = APIRouter(prefix="/cars", tags=["cars"])
 
 
 @router.get("/{car_id}", response_model=CarResponseSchema)
-def get_car(car_id: int, db = Depends(get_db)):
+def get_car(car_id: int, db: Session = Depends(get_db)):
     car_db = db.query(Car).filter(Car.id == car_id).first()
 
     if not car_db:
@@ -18,7 +20,10 @@ def get_car(car_id: int, db = Depends(get_db)):
 
 
 @router.post("/", response_model=CarResponseSchema)
-def create_car(car: CarCreateSchema, db: Session = Depends(get_db)):
+def create_car(car: CarCreateSchema, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    if current_user.role not in {"ADMIN", "AGENT"}:
+        raise HTTPException(status_code=403, detail="Not authorized")
+
     existing = db.query(Car).filter(Car.plate == car.plate).first()
     if existing:
         raise HTTPException(status_code=400, detail="Car with this plate already exists")

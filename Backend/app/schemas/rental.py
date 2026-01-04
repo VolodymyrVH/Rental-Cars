@@ -8,6 +8,7 @@ class RentalStatus(str, Enum):
     NOT_STARTED: str = "NOT_STARTED"
     ACTIVE: str = "ACTIVE"
     FINISHED: str = "FINISHED"
+    CANCELLED: str = "CANCELLED"
 
 
 class PaymentStatus(str, Enum):
