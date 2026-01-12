@@ -1,6 +1,6 @@
 import logo from '../assets/logoheader.png'
 import React from 'react'
-import './Headerstyle.css'
+import './Style.css'
 
 function Header() {
     return (

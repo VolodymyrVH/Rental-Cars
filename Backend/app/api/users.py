@@ -9,7 +9,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 
 
 @router.get("/{user_id}", response_model=UserResponseSchema)
-def get_user(user_id: int, db = Depends(get_db)):
+def get_user(user_id: int, db: Session = Depends(get_db)):
     user_db = db.query(User).filter(User.id == user_id).first()
     if not user_db:
         raise HTTPException(status_code=404, detail="User not found")

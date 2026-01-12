@@ -1,0 +1,110 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, a {
+    font-family: 'Arial', sans-serif;
+    text-decoration: none;
+    color: #195462;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.header_outline {
+    display: flex;
+    background-color: #ffc93c;
+    height: 5em;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10vw;
+    position: relative;
+    z-index: 2;
+}
+
+.logoside {
+    height: 5em;
+    display: flex;
+    min-height: 3em;
+}
+
+.menuside {
+    height: 5em;
+    display: flex;
+    align-items: center;
+}
+
+.header-navigation {
+    min-width: 20em;
+}
+
+.header-navigation li{
+    display: inline-block;
+    list-style-type: none;
+    padding: 0 15px;
+}
+
+.header-navigation li a {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.header-navigation li a:hover {
+    text-decoration: underline;
+}
+
+.background-container {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+}
+
+.imagesBG {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.imagesBG img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.imagesBG img.active {
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.637);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.text-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 5em;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+    padding: 0;
+}

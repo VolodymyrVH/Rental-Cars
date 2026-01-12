@@ -192,6 +192,15 @@ class CarResponseSchema(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class PaginatedCarResponse(BaseModel):
+    total: int
+    page: int
+    limit: int
+    items: list[CarResponseSchema]
+
+    model_config = {"from_attributes": True}
+
+
 class CarFilterSchema(BaseModel):
     type: str | None
     fuel: str | None
